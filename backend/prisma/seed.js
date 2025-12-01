@@ -112,10 +112,13 @@ async function main() {
     });
   }
 
+  // Delete existing attendance records to avoid conflicts
+  await prisma.attendance.deleteMany({});
+
   // Create some attendance records
   const studentRecords = await prisma.student.findMany();
   const today = new Date();
-  
+
   for (let i = 0; i < 7; i++) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
