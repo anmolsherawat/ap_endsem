@@ -9,15 +9,22 @@ const roomRoutes = require('./routes/roomRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
+const initDatabase = require('./config/initDatabase');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-}));
+// Simple CORS configuration for local + Vercel frontend
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',
+      'https://ap-endsem.vercel.app',
+      process.env.FRONTEND_URL,
+    ].filter(Boolean),
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -40,7 +47,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Initialize database then start server
+initDatabase().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 });
 
