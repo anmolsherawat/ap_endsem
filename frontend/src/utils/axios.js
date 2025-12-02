@@ -1,8 +1,25 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const getBaseURL = () => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+
+  if (typeof window !== 'undefined') {
+    const { origin } = window.location;
+    // When the frontend is deployed with the backend, hit the same origin
+    if (!origin.includes('localhost')) {
+      return `${origin}/api`;
+    }
+  }
+
+  // Local fallback for development
+  return 'http://localhost:5000/api';
+};
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+  baseURL: getBaseURL(),
   withCredentials: true,
 });
 
