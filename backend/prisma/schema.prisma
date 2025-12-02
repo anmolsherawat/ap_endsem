@@ -12,24 +12,28 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      String   // student, admin, warden
+  role      String
   phone     String?
   createdAt DateTime @default(now())
-  
+
   student    Student?
   complaints Complaint[]
+
+  @@map("user")
 }
 
 model Room {
-  id         String    @id @default(uuid())
+  id         String   @id @default(uuid())
   roomNumber String   @unique
-  type       String    // AC, Non-AC
+  type       String
   capacity   Int
   occupied   Int       @default(0)
   floor      Int
   createdAt  DateTime  @default(now())
-  
+
   students   Student[]
+
+  @@map("room")
 }
 
 model Student {
@@ -37,11 +41,13 @@ model Student {
   userId        String     @unique
   roomId        String?
   admissionDate DateTime   @default(now())
-  status        String     @default("active") // active, inactive
-  
+  status        String     @default("active")
+
   user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   room          Room?      @relation(fields: [roomId], references: [id], onDelete: SetNull)
   attendance    Attendance[]
+
+  @@map("student")
 }
 
 model Complaint {
@@ -49,20 +55,23 @@ model Complaint {
   userId      String
   title       String
   description String
-  category    String   // electricity, water, cleaning
-  status      String   @default("pending") // pending, resolved
+  category    String
+  status      String   @default("pending")
   createdAt   DateTime @default(now())
-  
+
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("complaint")
 }
 
 model Attendance {
   id        String   @id @default(uuid())
   studentId String
   date      DateTime @default(now())
-  status    String   // present, absent
-  
+  status    String
+
   student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  
+
   @@unique([studentId, date])
+  @@map("attendance")
 }
