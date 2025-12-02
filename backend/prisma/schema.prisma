@@ -1,12 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -19,20 +16,20 @@ model User {
   phone     String?
   createdAt DateTime @default(now())
   
-  student   Student?
+  student    Student?
   complaints Complaint[]
 }
 
 model Room {
-  id        String    @id @default(uuid())
+  id         String    @id @default(uuid())
   roomNumber String   @unique
-  type      String    // AC, Non-AC
-  capacity  Int
-  occupied  Int       @default(0)
-  floor     Int
-  createdAt DateTime  @default(now())
+  type       String    // AC, Non-AC
+  capacity   Int
+  occupied   Int       @default(0)
+  floor      Int
+  createdAt  DateTime  @default(now())
   
-  students  Student[]
+  students   Student[]
 }
 
 model Student {
@@ -69,4 +66,3 @@ model Attendance {
   
   @@unique([studentId, date])
 }
-
