@@ -11,8 +11,9 @@ const complaintRoutes = require('./routes/complaintRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 
 const app = express();
-// Bind to a fixed port (5001) to avoid conflicts with system processes on 5000
-const PORT = 5001;
+
+// ✔ FIX: Render required PORT support
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors({
@@ -41,7 +42,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
+// Server start
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`🚀 Backend running on port ${PORT}`);
 });
-
