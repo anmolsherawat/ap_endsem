@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   // student, admin, warden
+  phone     String?
+  createdAt DateTime @default(now())
+  
+  student   Student?
+  complaints Complaint[]
+}
+
+model Room {
+  id        String    @id @default(uuid())
+  roomNumber String   @unique
+  type      String    // AC, Non-AC
+  capacity  Int
+  occupied  Int       @default(0)
+  floor     Int
+  createdAt DateTime  @default(now())
+  
+  students  Student[]
+}
+
+model Student {
+  id            String     @id @default(uuid())
+  userId        String     @unique
+  roomId        String?
+  admissionDate DateTime   @default(now())
+  status        String     @default("active") // active, inactive
+  
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room          Room?      @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  attendance    Attendance[]
+}
+
+model Complaint {
+  id          String   @id @default(uuid())
+  userId      String
+  title       String
+  description String
+  category    String   // electricity, water, cleaning
+  status      String   @default("pending") // pending, resolved
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Attendance {
+  id        String   @id @default(uuid())
+  studentId String
+  date      DateTime @default(now())
+  status    String   // present, absent
+  
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  @@unique([studentId, date])
+}
+
