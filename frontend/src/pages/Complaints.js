@@ -165,6 +165,8 @@ const Complaints = () => {
               <option value="electricity">Electricity</option>
               <option value="water">Water</option>
               <option value="cleaning">Cleaning</option>
+              <option value="food">Food</option>
+              <option value="other">Other</option>
             </select>
           </div>
           <div>

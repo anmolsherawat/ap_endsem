@@ -14,8 +14,8 @@ const getBaseURL = () => {
     }
   }
 
-  // Local fallback for development
-  return 'http://localhost:5000/api';
+  // Local fallback for development (backend runs on 5001)
+  return 'http://localhost:5001/api';
 };
 
 const api = axios.create({

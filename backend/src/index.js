@@ -11,7 +11,8 @@ const complaintRoutes = require('./routes/complaintRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// Bind to a fixed port (5001) to avoid conflicts with system processes on 5000
+const PORT = 5001;
 
 // Middleware
 app.use(cors({
