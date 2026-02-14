@@ -213,5 +213,5 @@ After seeding the database, you can use these credentials:
 
 ## License
 
-This project is open source and available under the MIT License.
+
 
