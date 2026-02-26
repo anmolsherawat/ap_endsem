@@ -1,14 +1,8 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-// Always use the hosted backend on Render so both local and deployed
-// frontends talk to the same API, regardless of local .env settings.
-const getBaseURL = () => {
-  return 'https://ap-endsem-backend.onrender.com/api';
-};
-
 const api = axios.create({
-  baseURL: getBaseURL(),
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001/api',
   withCredentials: true,
 });
 

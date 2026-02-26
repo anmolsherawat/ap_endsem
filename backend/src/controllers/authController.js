@@ -51,18 +51,21 @@ const signup = async (req, res) => {
     const accessToken = generateAccessToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
 
-    // Set cookies
-    res.cookie('accessToken', accessToken, {
+    // Set cookies (sameSite: 'none' + secure needed for cross-origin Vercel<>Render)
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+    };
+
+    res.cookie('accessToken', accessToken, {
+      ...cookieOptions,
       maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
     res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -106,18 +109,21 @@ const login = async (req, res) => {
     const accessToken = generateAccessToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
 
-    // Set cookies
-    res.cookie('accessToken', accessToken, {
+    // Set cookies (sameSite: 'none' + secure needed for cross-origin Vercel<>Render)
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+    };
+
+    res.cookie('accessToken', accessToken, {
+      ...cookieOptions,
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 

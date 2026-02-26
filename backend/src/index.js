@@ -14,17 +14,21 @@ const initDatabase = require('./config/initDatabase');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Simple CORS configuration for local + Vercel frontend
-app.use(
-  cors({
-    origin: [
-      'http://localhost:3000',
-      'https://ap-endsem.vercel.app',
-      process.env.FRONTEND_URL,
-    ].filter(Boolean),
-    credentials: true,
-  })
-);
+// CORS configuration for local + deployed frontends
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://ap-endsem.vercel.app',
+    process.env.FRONTEND_URL,
+  ].filter(Boolean),
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
+// Explicitly handle preflight requests
+app.options('*', cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
