@@ -14,11 +14,13 @@ export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode
 
   useEffect(() => {
-    // Apply dark mode class to document
+    // Apply dark/light mode classes to document root
     if (darkMode) {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
     }
   }, [darkMode]);
 
