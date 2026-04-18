@@ -1,87 +1,118 @@
 import React from 'react';
-import { useTheme } from '../context/ThemeContext';
 import Footer from '../components/Footer';
+import { useTheme } from '../context/ThemeContext';
 
 const Home = () => {
   const { darkMode } = useTheme();
+  
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: darkMode ? '#111827' : '#fff' }}>
-      <section style={{ position: 'relative', height: '600px', backgroundImage: "url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)' }}></div>
-        
-        <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(255, 107, 53, 0.95)', padding: '32px 0' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px', textAlign: 'center', color: 'white' }}>
-            <img src="/logo.svg" alt="HostelMate" style={{ margin: '0 auto 10px', width: '150px', height: '75px', display: 'block' }} />
-            <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '8px' }}>HostelMate</h1>
-            <p style={{ fontSize: '20px' }}>Streamline your hostel operations with ease</p>
-          </div>
-        </div>
-      </section>
-
-      <section style={{ padding: '64px 0', backgroundColor: '#111827' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
-          <h2 style={{ fontSize: '48px', fontWeight: 'bold', textAlign: 'center', marginBottom: '16px', color: 'white' }}>
-            <span style={{ color: '#FF6B35' }}>Hostel</span> Management Features
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', marginTop: '48px' }}>
-            <div style={{ backgroundColor: '#1f2937', boxShadow: '0 10px 15px rgba(0,0,0,0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <div style={{ height: '192px', backgroundImage: "url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80')", backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-              <div style={{ padding: '24px' }}>
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginBottom: '12px' }}>Room Management</h3>
-                <p style={{ color: '#9ca3af', fontSize: '14px', lineHeight: '1.6' }}>
-                  Efficiently manage room allocations, track occupancy, and handle room assignments. 
-                  View room availability and capacity in real-time.
-                </p>
-              </div>
+    <div className="min-h-screen soft-gradient-bg">
+      <section className="relative py-28 md:py-40">
+        <div className="max-w-7xl mx-auto px-8 lg:px-12">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800/40 border border-slate-700/30 mb-10">
+              <span className="text-sm text-slate-400">✨ Premium Hostel Management</span>
             </div>
-
-            <div style={{ backgroundColor: '#1f2937', boxShadow: '0 10px 15px rgba(0,0,0,0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <div style={{ height: '192px', backgroundImage: "url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80')", backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-              <div style={{ padding: '24px' }}>
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginBottom: '12px' }}>Student Management</h3>
-                <p style={{ color: '#9ca3af', fontSize: '14px', lineHeight: '1.6' }}>
-                  Register students, allocate rooms, and manage student information. 
-                  Track student status and admission details easily.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ backgroundColor: '#1f2937', boxShadow: '0 10px 15px rgba(0,0,0,0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <div style={{ height: '192px', backgroundImage: "url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=600&q=80')", backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-              <div style={{ padding: '24px' }}>
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginBottom: '12px' }}>Complaint System</h3>
-                <p style={{ color: '#9ca3af', fontSize: '14px', lineHeight: '1.6' }}>
-                  Submit and track complaints efficiently. Students can report issues 
-                  and admins can resolve them quickly.
-                </p>
-              </div>
+            <h1 className="text-6xl md:text-7xl font-semibold mb-8 leading-tight">
+              <span className="gradient-text">HostelMate</span>
+            </h1>
+            <p className={`text-xl md:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Streamline your hostel operations with an elegant, intuitive, and powerful management system built for the future.
+            </p>
+            <div className="flex gap-5 justify-center flex-wrap">
+              <a 
+                href="/login" 
+                className="btn-primary px-12 py-4.5 text-lg font-semibold text-white rounded-2xl"
+              >
+                Get Started
+              </a>
+              <a 
+                href="#features" 
+                className={`px-12 py-4.5 text-lg font-semibold rounded-2xl btn-ghost ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}
+              >
+                Learn More
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '64px 0', backgroundColor: darkMode ? '#1f2937' : '#f3f4f6' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
-          <h2 style={{ fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '48px', color: darkMode ? '#fff' : '#333' }}>
-            Why Choose Our System?
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px' }}>
-            <div style={{ backgroundColor: darkMode ? '#374151' : 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-              <h3 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '8px', color: darkMode ? '#fff' : '#111' }}>Digital Attendance</h3>
-              <p style={{ color: darkMode ? '#9ca3af' : '#6b7280', fontSize: '14px' }}>Track attendance digitally with real-time updates</p>
-            </div>
-            <div style={{ backgroundColor: darkMode ? '#374151' : 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-              <h3 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '8px', color: darkMode ? '#fff' : '#111' }}>Analytics Dashboard</h3>
-              <p style={{ color: darkMode ? '#9ca3af' : '#6b7280', fontSize: '14px' }}>Comprehensive statistics and visual reports</p>
-            </div>
-            <div style={{ backgroundColor: darkMode ? '#374151' : 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-              <h3 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '8px', color: darkMode ? '#fff' : '#111' }}>Secure & Safe</h3>
-              <p style={{ color: darkMode ? '#9ca3af' : '#6b7280', fontSize: '14px' }}>Role-based access control and data security</p>
-            </div>
-            <div style={{ backgroundColor: darkMode ? '#374151' : 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-              <h3 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '8px', color: darkMode ? '#fff' : '#111' }}>Fast & Efficient</h3>
-              <p style={{ color: darkMode ? '#9ca3af' : '#6b7280', fontSize: '14px' }}>Streamlined processes for better management</p>
-            </div>
+      <section id="features" className="py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8 lg:px-12">
+          <div className="text-center mb-20">
+            <h2 className={`text-4xl md:text-5xl font-semibold mb-5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+              Powerful Features
+            </h2>
+            <p className={`text-xl max-w-2xl mx-auto ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Everything you need to manage your hostel efficiently and beautifully
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { 
+                icon: '🏠', 
+                title: 'Room Management', 
+                desc: 'Efficiently manage room allocations, track occupancy, and handle room assignments with real-time availability.' 
+              },
+              { 
+                icon: '👥', 
+                title: 'Student Management', 
+                desc: 'Register students, allocate rooms, and manage student information with ease and clarity.' 
+              },
+              { 
+                icon: '📝', 
+                title: 'Complaint System', 
+                desc: 'Submit and track complaints efficiently. Students can report issues and admins can resolve them quickly.' 
+              }
+            ].map((feature, i) => (
+              <div 
+                key={i}
+                className="card-premium p-10 glow-border"
+              >
+                <div className="w-16 h-16 rounded-2xl gradient-accent flex items-center justify-center text-3xl mb-7">
+                  {feature.icon}
+                </div>
+                <h3 className={`text-2xl font-semibold mb-5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+                  {feature.title}
+                </h3>
+                <p className={`leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                  {feature.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-auto max-w-5xl"></div>
+
+      <section className="py-24 md:py-28">
+        <div className="max-w-6xl mx-auto px-8 lg:px-12">
+          <div className="text-center mb-20">
+            <h2 className={`text-4xl md:text-5xl font-semibold mb-5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+              Why Choose HostelMate?
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+            {[
+              { icon: '📊', title: 'Analytics', desc: 'Comprehensive stats' },
+              { icon: '🔒', title: 'Secure', desc: 'Role-based access' },
+              { icon: '⚡', title: 'Fast', desc: 'Optimized performance' },
+              { icon: '🎨', title: 'Beautiful', desc: 'Premium design' }
+            ].map((item, i) => (
+              <div 
+                key={i} 
+                className="card-premium p-8 text-center"
+              >
+                <div className="text-4xl mb-5">{item.icon}</div>
+                <h3 className={`text-lg font-semibold mb-2.5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+                  {item.title}
+                </h3>
+                <p className={`text-sm ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
