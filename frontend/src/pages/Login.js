@@ -34,55 +34,57 @@ const Login = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: darkMode ? '#111827' : '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 16px' }}>
-      <div style={{ maxWidth: '448px', width: '100%', backgroundColor: darkMode ? '#1f2937' : 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 10px 15px rgba(0,0,0,0.1)' }}>
-        <div style={{ textAlign: 'center' }}>
-          <img src="/logo.svg" alt="HostelMate Logo" style={{ width: '120px', margin: '0 auto 20px', display: 'block' }} />
-          <h2 style={{ marginTop: '24px', textAlign: 'center', fontSize: '30px', fontWeight: 'bold', color: darkMode ? '#fff' : '#333' }}>
-            Sign in to your account
+    <div className="min-h-screen soft-gradient-bg flex items-center justify-center p-8">
+      <div className="w-full max-w-md card-premium p-12 glow-border">
+        <div className="text-center mb-12">
+          <img 
+            src="/logo.svg" 
+            alt="HostelMate Logo" 
+            className="w-20 h-10 mx-auto mb-7" 
+          />
+          <h2 className={`text-3xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+            Welcome back
           </h2>
-          <p style={{ marginTop: '8px', textAlign: 'center', fontSize: '14px', color: darkMode ? '#9ca3af' : '#6b7280' }}>
-            Or{' '}
-            <Link to="/signup" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500' }}>
+          <p className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Sign in to your account. Or{' '}
+            <Link to="/signup" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
               create a new account
             </Link>
           </p>
         </div>
-        <form style={{ marginTop: '32px' }} onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                style={{ width: '100%', padding: '8px 12px', border: '1px solid ' + (darkMode ? '#374151' : '#d1d5db'), borderRadius: '4px', fontSize: '14px', backgroundColor: darkMode ? '#374151' : 'white', color: darkMode ? '#fff' : '#111' }}
-                placeholder="Email address"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div style={{ marginTop: '8px' }}>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                style={{ width: '100%', padding: '8px 12px', border: '1px solid ' + (darkMode ? '#374151' : '#d1d5db'), borderRadius: '4px', fontSize: '14px', backgroundColor: darkMode ? '#374151' : 'white', color: darkMode ? '#fff' : '#111' }}
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className={`w-full px-6 py-4.5 text-base rounded-2xl input-premium ${darkMode ? 'text-white placeholder-slate-500' : 'text-slate-900 placeholder-slate-400'}`}
+              placeholder="Email address"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className={`w-full px-6 py-4.5 text-base rounded-2xl input-premium ${darkMode ? 'text-white placeholder-slate-500' : 'text-slate-900 placeholder-slate-400'}`}
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
 
-          <div style={{ marginTop: '24px' }}>
+          <div className="pt-3">
             <button
               type="submit"
               disabled={loading}
-              style={{ width: '100%', padding: '10px 16px', backgroundColor: '#FF6B35', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '500', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.5 : 1 }}
+              className="w-full py-4.5 btn-primary text-base font-semibold text-white rounded-2xl"
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
