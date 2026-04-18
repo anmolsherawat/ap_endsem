@@ -57,9 +57,9 @@ const PublicRoute = ({ children }) => {
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div>
+    <div className="soft-gradient-bg min-h-screen">
       <Navbar />
-      <main className="min-h-screen bg-gray-50 dark:bg-gray-900">{children}</main>
+      <main className="pt-10 pb-20 px-8 lg:px-12 max-w-7xl mx-auto">{children}</main>
     </div>
   );
 };
