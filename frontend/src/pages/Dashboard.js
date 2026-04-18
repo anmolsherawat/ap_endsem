@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-
+import { useTheme } from '../context/ThemeContext';
 import api from '../utils/axios';
 import { PageSkeleton } from '../components/LoadingSkeleton';
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const { darkMode } = useTheme();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState(null);
 
@@ -85,25 +86,60 @@ const Dashboard = () => {
 
   if (user?.role === 'admin' || user?.role === 'warden') {
     return (
-      <div className="p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
-        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Admin Dashboard</h1>
+      <div>
+        <div className="mb-16">
+          <h1 className="text-4xl font-semibold mb-3">
+            <span className="gradient-text">Admin Dashboard</span>
+          </h1>
+          <p className={`text-lg ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Welcome back, {user?.name}!
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-            <div className="text-3xl font-bold text-hostel-orange">{stats?.totalStudents || 0}</div>
-            <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Total Students</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="card-premium p-10 glow-border">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-3xl mb-6">
+              👥
+            </div>
+            <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+              {stats?.totalStudents || 0}
+            </div>
+            <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Total Students
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-            <div className="text-3xl font-bold text-green-600">{stats?.availableRooms || 0}</div>
-            <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Available Rooms</div>
+          <div className="card-premium p-10 glow-border">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-3xl mb-6">
+              🏠
+            </div>
+            <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+              {stats?.availableRooms || 0}
+            </div>
+            <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Available Rooms
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-            <div className="text-3xl font-bold text-yellow-600">{stats?.pendingComplaints || 0}</div>
-            <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Pending Complaints</div>
+          <div className="card-premium p-10 glow-border">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-3xl mb-6">
+              ⚠️
+            </div>
+            <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+              {stats?.pendingComplaints || 0}
+            </div>
+            <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Pending Complaints
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-            <div className="text-3xl font-bold text-purple-600">{stats?.activeStudents || 0}</div>
-            <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Active Students</div>
+          <div className="card-premium p-10 glow-border">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-3xl mb-6">
+              ✅
+            </div>
+            <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+              {stats?.activeStudents || 0}
+            </div>
+            <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Active Students
+            </div>
           </div>
         </div>
       </div>
@@ -111,56 +147,94 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Student Dashboard</h1>
+    <div>
+      <div className="mb-16">
+        <h1 className="text-4xl font-semibold mb-3">
+          <span className="gradient-text">Student Dashboard</span>
+        </h1>
+        <p className={`text-lg ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+          Welcome back, {user?.name}!
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-          <div className="text-3xl font-bold text-hostel-orange">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14">
+        <div className="card-premium p-10 glow-border">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-3xl mb-6">
+            🏠
+          </div>
+          <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             {stats?.room ? stats.room.roomNumber : 'N/A'}
           </div>
-          <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Room Number</div>
+          <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Room Number
+          </div>
           {stats?.room && (
-            <div className="text-sm text-gray-400 dark:text-gray-500 mt-2">
-              {stats.room.type} | Floor {stats.room.floor}
+            <div className={`text-sm mt-3 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
+              {stats.room.type} • Floor {stats.room.floor}
             </div>
           )}
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-          <div className="text-3xl font-bold text-yellow-600">{stats?.myComplaints || 0}</div>
-          <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">My Complaints</div>
-          <div className="text-sm text-gray-400 dark:text-gray-500 mt-2">
+        <div className="card-premium p-10 glow-border">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-3xl mb-6">
+            📝
+          </div>
+          <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+            {stats?.myComplaints || 0}
+          </div>
+          <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            My Complaints
+          </div>
+          <div className={`text-sm mt-3 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
             {stats?.pendingComplaints || 0} pending
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-100 dark:border-gray-700">
-          <div className="text-3xl font-bold text-green-600">
+        <div className="card-premium p-10 glow-border">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-3xl mb-6">
+            ✅
+          </div>
+          <div className={`text-5xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             {stats?.attendanceStats?.percentage?.toFixed(1) || 0}%
           </div>
-          <div className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Attendance</div>
-          <div className="text-sm text-gray-400 dark:text-gray-500 mt-2">
-            {stats?.attendanceStats?.present || 0} present / {stats?.attendanceStats?.total || 0} total
+          <div className={`${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Attendance
+          </div>
+          <div className={`text-sm mt-3 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
+            {stats?.attendanceStats?.present || 0} / {stats?.attendanceStats?.total || 0} days
           </div>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
-        <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-700 pb-4">Personal Information</h2>
-        <div className="space-y-4 text-gray-700 dark:text-gray-300">
-          <div className="flex flex-col sm:flex-row sm:items-center">
-            <span className="font-semibold w-32">Name:</span>
-            <span>{user?.name}</span>
+      <div className="card-premium p-12">
+        <h2 className={`text-2xl font-semibold mb-10 pb-5 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+          Personal Information
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <span className={`block text-sm mb-2 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
+              Name
+            </span>
+            <span className={`text-xl font-medium ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+              {user?.name}
+            </span>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center">
-            <span className="font-semibold w-32">Email:</span>
-            <span>{user?.email}</span>
+          <div>
+            <span className={`block text-sm mb-2 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
+              Email
+            </span>
+            <span className={`text-xl font-medium ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+              {user?.email}
+            </span>
           </div>
           {user?.phone && (
-            <div className="flex flex-col sm:flex-row sm:items-center">
-              <span className="font-semibold w-32">Phone:</span>
-              <span>{user.phone}</span>
+            <div>
+              <span className={`block text-sm mb-2 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
+                Phone
+              </span>
+              <span className={`text-xl font-medium ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+                {user.phone}
+              </span>
             </div>
           )}
         </div>
