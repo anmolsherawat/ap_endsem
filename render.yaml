@@ -3,7 +3,7 @@ services:
     name: hostelmate-backend
     runtime: node
     plan: free
-    buildCommand: cd backend && npm install && npm run prisma:generate && npm run migrate
+    buildCommand: cd backend && npm install && npm run build
     startCommand: cd backend && npm start
     rootDir: .
     envVars:
