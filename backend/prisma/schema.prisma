@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// To use PostgreSQL, comment the above and uncomment below:
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
 model User {
   id        String   @id @default(uuid())
   name      String
